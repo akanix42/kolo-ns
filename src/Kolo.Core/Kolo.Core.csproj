@@ -43,7 +43,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="DataAccess\IUnitOfWork.cs" />
     <Compile Include="DataAccess\IUnitOfWorkProvider.cs" />
     <Compile Include="DataAccess\NPocoUnitOfWork.cs" />
@@ -51,7 +50,11 @@
     <Compile Include="DataAccess\Repositories\DnsEntriesRepository.cs" />
     <Compile Include="DataAccess\Repositories\IDnsEntriesRepository.cs" />
     <Compile Include="Models\DnsEntry.cs" />
+    <Compile Include="Models\DnsRequest.cs" />
+    <Compile Include="Models\DnsResolutionResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\DnsResolver.cs" />
+    <Compile Include="Services\IDnsResolver.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

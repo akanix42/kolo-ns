@@ -1,5 +1,7 @@
 ﻿using FluentAssertions;
-using Kolo.Service.Tests.Integration;
+using Kolo.Core.DataAccess;
+using Kolo.Core.DataAccess.Repositories;
+using Kolo.Core.Models;
 using NUnit.Framework;
 
 namespace Kolo.Core.Tests.Integration
@@ -20,7 +22,7 @@ namespace Kolo.Core.Tests.Integration
             IUnitOfWorkProvider unitOfWorkProvider = new NPocoUnitOfWorkProvider();
             using (var uow = unitOfWorkProvider.GetUnitOfWork())
             {
-                IDnsEntriesRepository repository = new DnsEntriesRepository();
+                IDnsEntriesRepository repository = new DnsEntriesRepository(unitOfWorkProvider);
 
                 var id = repository.AddDnsEntry(uow, dnsEntry);
 

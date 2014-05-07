@@ -1,11 +1,11 @@
 ﻿using System;
 using NPoco;
 
-namespace Kolo.Service.Tests.Integration
+namespace Kolo.Core.DataAccess
 {
     public interface IUnitOfWork : IDisposable
     {
         void Commit();
-        Database Db { get; }
+        IDatabase Db { get; }
     }
 }

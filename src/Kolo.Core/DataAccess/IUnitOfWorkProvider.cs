@@ -1,4 +1,4 @@
-namespace Kolo.Service.Tests.Integration
+namespace Kolo.Core.DataAccess
 {
     public interface IUnitOfWorkProvider
     {

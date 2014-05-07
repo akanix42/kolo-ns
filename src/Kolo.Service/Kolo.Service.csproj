@@ -46,10 +46,18 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\DnsQueryHandler.cs" />
+    <Compile Include="Services\IDnsQueryHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Kolo.Core\Kolo.Core.csproj">
+      <Project>{6C960CA7-B4E7-488E-9DA2-A670F37E4E39}</Project>
+      <Name>Kolo.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

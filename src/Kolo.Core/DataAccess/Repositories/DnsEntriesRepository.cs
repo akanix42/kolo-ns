@@ -1,12 +1,27 @@
 ﻿using System;
+using Kolo.Core.Models;
+using NPoco;
 
-namespace Kolo.Service.Tests.Integration
+namespace Kolo.Core.DataAccess.Repositories
 {
     public class DnsEntriesRepository : IDnsEntriesRepository
     {
+
+        public DnsEntriesRepository(IUnitOfWorkProvider unitOfWorkProvider)
+        {
+        }
         public int AddDnsEntry(IUnitOfWork uow, DnsEntry dnsEntry)
         {
             return Convert.ToInt32(uow.Db.Insert(dnsEntry));
+        }
+
+        public DnsEntry FindDnsEntry(IUnitOfWork uow, DnsRequest dnsRequest)
+        {
+            return uow.Db.FirstOrDefault<DnsEntry>(new Sql()
+                .Append("SELECT * FROM dns_entries dnsEntry")
+                .Append("WHERE dnsEntry.FullName = @name", new { name = dnsRequest.Name })
+                .Append("AND dnsEntry.Type = @type", new { type = dnsRequest.Type })
+                );
         }
     }
 }

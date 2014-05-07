@@ -1,6 +1,6 @@
 ﻿using NPoco;
 
-namespace Kolo.Service.Tests.Integration
+namespace Kolo.Core.Models
 {
     [TableName("dns_entries")]
     [PrimaryKey("Id")]

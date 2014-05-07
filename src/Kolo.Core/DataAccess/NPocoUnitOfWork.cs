@@ -1,7 +1,7 @@
 using System.Data;
 using NPoco;
 
-namespace Kolo.Service.Tests.Integration
+namespace Kolo.Core.DataAccess
 {
     public class NPocoUnitOfWork : IUnitOfWork
     {
@@ -19,7 +19,7 @@ namespace Kolo.Service.Tests.Integration
             _transaction.Dispose();
         }
 
-        public Database Db
+        public IDatabase Db
         {
             get { return _db; }
         }
