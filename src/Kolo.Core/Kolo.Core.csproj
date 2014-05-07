@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{49D6FB40-2EA5-4F22-BDCD-8C86A2D116A6}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{6C960CA7-B4E7-488E-9DA2-A670F37E4E39}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Kolo.Service</RootNamespace>
-    <AssemblyName>Kolo.Service</AssemblyName>
+    <RootNamespace>Kolo.Core</RootNamespace>
+    <AssemblyName>Kolo.Core</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -32,10 +30,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ARSoft.Tools.Net">
-      <HintPath>..\packages\ARSoft.Tools.Net.1.8.0\lib\ARSoft.Tools.Net.dll</HintPath>
+    <Reference Include="NPoco">
+      <HintPath>..\packages\NPoco.2.2.49\lib\net40\NPoco.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -44,11 +43,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="Class1.cs" />
+    <Compile Include="DataAccess\IUnitOfWork.cs" />
+    <Compile Include="DataAccess\IUnitOfWorkProvider.cs" />
+    <Compile Include="DataAccess\NPocoUnitOfWork.cs" />
+    <Compile Include="DataAccess\NPocoUnitOfWorkProvider.cs" />
+    <Compile Include="DataAccess\Repositories\DnsEntriesRepository.cs" />
+    <Compile Include="DataAccess\Repositories\IDnsEntriesRepository.cs" />
+    <Compile Include="Models\DnsEntry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
