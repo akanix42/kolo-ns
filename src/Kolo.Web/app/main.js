@@ -4,18 +4,25 @@
         'durandal': '../lib/durandal/js',
         'plugins': '../lib/durandal/js/plugins',
         'transitions': '../lib/durandal/js/transitions',
-        'knockout': '../lib/knockout/knockout-3.1.0',
+        'knockout': '../lib/knockout/knockout-3.1.0.debug',
+        'knockout-validation': '../lib/knockout-validation/knockout.validation',
         'bootstrap': '../lib/bootstrap/js/bootstrap',
         'jquery': '../lib/jquery/jquery-2.1.1.min',
-        'when':'../lib/when/when'
+        'when': '../lib/when/when',
+        'jquery.validate.main': '../lib/jquery.validate/jquery.validate',
+        'jquery.validate.additional': '../lib/jquery.validate/additional-methods',
+        'jquery.validate': 'jquery.validate.shim',
 
     },
     shim: {
         'bootstrap': {
             deps: ['jquery'],
             exports: 'jQuery'
-        }
+        },
+        'jquery.validate.main': ['jquery'],
+        'jquery.validate.additional': ['jquery', 'jquery.validate.main']
     }
+
 });
 
 define(function (require) {

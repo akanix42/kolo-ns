@@ -47,6 +47,15 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Ninject">
+      <HintPath>..\packages\Ninject.3.2.0.0\lib\net45-full\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Web.Common">
+      <HintPath>..\packages\Ninject.Web.Common.3.2.0.0\lib\net45-full\Ninject.Web.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Web.WebApi">
+      <HintPath>..\packages\Ninject.Web.WebApi.3.2.0.0\lib\net45-full\Ninject.Web.WebApi.dll</HintPath>
+    </Reference>
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.Formatting, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -100,8 +109,14 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="WebActivatorEx">
+      <HintPath>..\packages\WebActivatorEx.2.0\lib\net40\WebActivatorEx.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\config.js" />
+    <Content Include="app\jquery.validate.shim.js" />
+    <Content Include="app\repositories\dns-entries-repository.js" />
     <Content Include="app\main.js" />
     <Content Include="app\viewmodels\dns-entry.js" />
     <Content Include="app\viewmodels\flickr.js" />
@@ -156,8 +171,11 @@
     <Content Include="lib\font-awesome\css\font-awesome.css" />
     <Content Include="lib\font-awesome\css\font-awesome.min.css" />
     <Content Include="lib\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="lib\jquery.validate\additional-methods.js" />
+    <Content Include="lib\jquery.validate\jquery.validate.js" />
     <Content Include="lib\jquery\jquery-1.11.1.min.js" />
     <Content Include="lib\jquery\jquery-2.1.1.min.js" />
+    <Content Include="lib\knockout-validation\knockout.validation.js" />
     <Content Include="lib\knockout\knockout-3.1.0.debug.js" />
     <Content Include="lib\knockout\knockout-3.1.0.js" />
     <Content Include="lib\require\almond-custom.js" />
@@ -168,6 +186,7 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <None Include="Controllers\DnsGroupsController.cs.o" />
