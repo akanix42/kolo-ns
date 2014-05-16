@@ -15,9 +15,7 @@
                 var elementData = $element.data();
                 if (!(rule in elementData)) continue;
                 value = elementData[rule] || true;
-                // hello
                 rules[method] = value;
-                //}
             }
             return rules;
         }
@@ -38,12 +36,4 @@
                 self.submitted[this.name] = '';
             });
     };
-    //$.extend($.validator.prototype, {
-    //    init: function() {
-    //        originalInit();
-
-    //    }
-
-    //});
-
 });
