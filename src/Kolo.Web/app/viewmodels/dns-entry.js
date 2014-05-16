@@ -7,10 +7,14 @@
         observable = require('plugins/observable'),
         $ = require('jquery');
 
+    function getEmptyModel() {
+        return { Name: '', IpV4: '', Id: null, GroupId: null, Type: 'A', };
+    }
     var ctor = function () {
         var self = this;
+        var emptyModel
         var validator;
-        this.model = { Name: '', IpV4: '', Id: null, GroupId: null, Type: 'A', };
+        this.model = getEmptyModel();
         //applyValidation();
         this.save = function () {
             if (!validator.form()) return;
@@ -30,7 +34,8 @@
         }
 
         function loadDnsEntry(dnsEntryId) {
-            self.model = { Name: 'test', IpV4: '127.0.0.1', Id: 1, GroupId: 2 };
+            $.extend(self.model, getEmptyModel(), { Name: 'test', IpV4: '127.0.0.1', Id: null, GroupId: 2 });
+            //self.model = { Name: 'test', IpV4: '127.0.0.1', Id: 1, GroupId: 2 };
             //applyValidation();
 
         }

@@ -6,5 +6,6 @@ namespace Kolo.Core.DataAccess.Repositories
     {
         int AddDnsEntry(IUnitOfWork uow, DnsEntry dnsEntry);
         DnsEntry FindDnsEntry(IUnitOfWork uow, DnsRequest dnsRequest);
+        void DeleteAllEntries(IUnitOfWork uow);
     }
 }

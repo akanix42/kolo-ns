@@ -23,5 +23,11 @@ namespace Kolo.Core.DataAccess.Repositories
                 .Append("AND dnsEntry.Type = @type", new { type = dnsRequest.Type })
                 );
         }
+
+        public void DeleteAllEntries(IUnitOfWork uow)
+        {
+            uow.Db.Execute(new Sql()
+                .Append("DELETE FROM dns_entries"));
+        }
     }
 }

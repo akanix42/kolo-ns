@@ -32,5 +32,28 @@ namespace Kolo.Core.Tests.Integration
                 dnsEntry.Id.Should().BeGreaterThan(0, "because a valid ID should have been returned when the dns entry was created.");
             }
         }
+        [Test]
+        public void Should_Find_DNS_Entry()
+        {
+            var dnsEntry = new DnsEntry()
+            {
+                Type = "TXT",
+                Name = "test",
+                IpV4 = "192.168.1.1",
+            };
+
+            IUnitOfWorkProvider unitOfWorkProvider = new NPocoUnitOfWorkProvider();
+            using (var uow = unitOfWorkProvider.GetUnitOfWork())
+            {
+                IDnsEntriesRepository repository = new DnsEntriesRepository(unitOfWorkProvider);
+
+                repository.DeleteAllEntries(uow);
+                var id = repository.AddDnsEntry(uow, dnsEntry);
+               
+                uow.Commit();
+
+                repository.FindDnsEntry(uow, new DnsRequest() {Name = dnsEntry.Name, Type = dnsEntry.Type}).Id.Should().Be(id);
+            }
+        }
     }
 }
