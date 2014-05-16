@@ -10,5 +10,6 @@ namespace Kolo.Core.Models
         public string Type { get; set; }
         public string IpV4 { get; set; }
         public string Name { get; set; }
+        public string FullName { get; set; }
     }
 }

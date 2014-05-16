@@ -12,29 +12,49 @@
     }
     var ctor = function () {
         var self = this;
-        var emptyModel
+        
         var validator;
-        this.model = getEmptyModel();
+        self.model = getEmptyModel();
         //applyValidation();
-        this.save = function () {
+        self.save = function () {
             if (!validator.form()) return;
 
             if (!self.model.Id)
                 dnsEntriesRepository.addDnsEntry(self.model);
+            else
+                dnsEntriesRepository.updateDnsEntry(self.model);
+
 
         };
 
-        this.activate = function (dnsEntryId) {
-            if (dnsEntryId != 'new')
-                loadDnsEntry(dnsEntryId);
+        self.remove = function () {
+            dnsEntriesRepository.deleteDnsEntry(self.model.Id)
+                .then(function() {
+                    router.navigate('#dns-entries?groupId=' + self.model.GroupId);
+                });
         }
 
-        this.compositionComplete = function () {
-            applyValidation();
-        }
+        setUpDurandalEvents();
 
+        function setUpDurandalEvents() {
+            self.activate = function (dnsEntryId) {
+                if (dnsEntryId != 'new')
+                    loadDnsEntry(dnsEntryId);
+            }
+
+            self.compositionComplete = function () {
+                applyValidation();
+            }
+
+        }
+       
         function loadDnsEntry(dnsEntryId) {
-            $.extend(self.model, getEmptyModel(), { Name: 'test', IpV4: '127.0.0.1', Id: null, GroupId: 2 });
+            dnsEntriesRepository.getDnsEntry(dnsEntryId)
+            .then(function(dnsEntry) {
+                $.extend(self.model, getEmptyModel(), dnsEntry);
+
+            });
+            //$.extend(self.model, getEmptyModel(), { Name: 'test', IpV4: '127.0.0.1', Id: null, GroupId: 2 });
             //self.model = { Name: 'test', IpV4: '127.0.0.1', Id: 1, GroupId: 2 };
             //applyValidation();
 

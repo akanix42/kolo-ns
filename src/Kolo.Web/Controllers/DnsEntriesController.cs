@@ -22,15 +22,21 @@ namespace Kolo.Web.Controllers
         }
 
         // GET api/dnsentries
-        public IEnumerable<string> Get()
+        public List<DnsEntry> Get()
         {
-            return new string[] { "value1", "value2" };
+            using (var uow = unitOfWorkProvider.GetUnitOfWork())
+            {
+                return dnsEntriesRepository.GetAllDnsEntries(uow);
+            }
         }
 
         // GET api/dnsentries/5
-        public string Get(int id)
+        public DnsEntry Get(int id)
         {
-            return "value";
+            using (var uow = unitOfWorkProvider.GetUnitOfWork())
+            {
+                return dnsEntriesRepository.GetDnsEntry(uow,id);
+            }
         }
 
         // POST api/dnsentries
@@ -38,19 +44,32 @@ namespace Kolo.Web.Controllers
         {
             using (var uow = unitOfWorkProvider.GetUnitOfWork())
             {
+                dnsEntry.FullName = dnsEntry.Name;
                 dnsEntriesRepository.AddDnsEntry(uow, dnsEntry);
                 uow.Commit();
             }
         }
 
         // PUT api/dnsentries/5
-        public void Put(int id, [FromBody]string value)
+        public void Put(int id, DnsEntry dnsEntry)
         {
+            using (var uow = unitOfWorkProvider.GetUnitOfWork())
+            {
+                dnsEntry.FullName = dnsEntry.Name;
+                dnsEntriesRepository.UpdateDnsEntry(uow, dnsEntry);
+                uow.Commit();
+            }
         }
 
         // DELETE api/dnsentries/5
         public void Delete(int id)
         {
+            using (var uow = unitOfWorkProvider.GetUnitOfWork())
+            {
+                dnsEntriesRepository.DeleteDnsEntry(uow, id);
+
+                uow.Commit();
+            }
         }
     }
 }
