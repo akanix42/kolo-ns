@@ -172,7 +172,9 @@
     <Content Include="lib\font-awesome\css\font-awesome.min.css" />
     <Content Include="lib\font-awesome\fonts\fontawesome-webfont.svg" />
     <Content Include="lib\jquery.validate\additional-methods.js" />
+    <Content Include="lib\jquery.validate\additional-methods.min.js" />
     <Content Include="lib\jquery.validate\jquery.validate.js" />
+    <Content Include="lib\jquery.validate\jquery.validate.min.js" />
     <Content Include="lib\jquery\jquery-1.11.1.min.js" />
     <Content Include="lib\jquery\jquery-2.1.1.min.js" />
     <Content Include="lib\knockout-validation\knockout.validation.js" />

@@ -19,7 +19,7 @@ namespace Kolo.Core.DataAccess.Repositories
         {
             return uow.Db.FirstOrDefault<DnsEntry>(new Sql()
                 .Append("SELECT * FROM dns_entries dnsEntry")
-                .Append("WHERE dnsEntry.FullName = @name", new { name = dnsRequest.Name })
+                .Append("WHERE dnsEntry.Name = @name", new { name = dnsRequest.Name })
                 .Append("AND dnsEntry.Type = @type", new { type = dnsRequest.Type })
                 );
         }

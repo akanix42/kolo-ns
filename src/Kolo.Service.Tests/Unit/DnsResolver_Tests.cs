@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using ARSoft.Tools.Net.Dns;
@@ -26,7 +27,7 @@ namespace Kolo.Service.Tests.Unit
             var dnsResolver = Mock.Of<IDnsResolver>();
             IDnsQueryHandler queryHandler = new DnsQueryHandler(dnsResolver);
             var message = new DnsMessage();
-            DnsMessageBase processedMessage = queryHandler.HandleQuery(message, null, KeyRecordBase.ProtocolType.Any);
+            DnsMessageBase processedMessage = queryHandler.HandleQuery(message, null, ProtocolType.IP);
             processedMessage.ReturnCode.Should().Be(ReturnCode.ServerFailure);
         }
 
@@ -36,7 +37,7 @@ namespace Kolo.Service.Tests.Unit
             var dnsResolver = Mock.Of<IDnsResolver>(mock => mock.Resolve(It.IsAny<DnsRequest>()) == new DnsResolutionResult());
             IDnsQueryHandler queryHandler = new DnsQueryHandler(dnsResolver);
             var message = new DnsMessage() {Questions = new List<DnsQuestion>() {new DnsQuestion("test", RecordType.A, RecordClass.Any)}};
-            DnsMessageBase processedMessage = queryHandler.HandleQuery(message, null, KeyRecordBase.ProtocolType.Any);
+            DnsMessageBase processedMessage = queryHandler.HandleQuery(message, null, ProtocolType.IP);
             processedMessage.ReturnCode.Should().Be(ReturnCode.NxDomain);
         }
 
@@ -49,7 +50,7 @@ namespace Kolo.Service.Tests.Unit
             });
             IDnsQueryHandler queryHandler = new DnsQueryHandler(dnsResolver);
             var message = new DnsMessage() { Questions = new List<DnsQuestion>() { new DnsQuestion("test", RecordType.A, RecordClass.Any) } };
-            queryHandler.HandleQuery(message, null, KeyRecordBase.ProtocolType.Any);
+            queryHandler.HandleQuery(message, null, ProtocolType.IP);
             message.ReturnCode.Should().Be(ReturnCode.NoError);
         }
 
@@ -62,7 +63,7 @@ namespace Kolo.Service.Tests.Unit
             });
             IDnsQueryHandler queryHandler = new DnsQueryHandler(dnsResolver);
             var message = new DnsMessage() { Questions = new List<DnsQuestion>() { new DnsQuestion("test", RecordType.A, RecordClass.Any) } };
-            queryHandler.HandleQuery(message, null, KeyRecordBase.ProtocolType.Any);
+            queryHandler.HandleQuery(message, null, ProtocolType.IP);
             message.AnswerRecords.Single().Name.Should().Be("test");
         }
     }

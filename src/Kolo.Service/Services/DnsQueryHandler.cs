@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Net;
+using System.Net.Sockets;
 using ARSoft.Tools.Net.Dns;
 using Kolo.Core.Models;
 using Kolo.Core.Services;
@@ -15,7 +16,7 @@ namespace Kolo.Service.Services
             this.dnsResolver = dnsResolver;
         }
 
-        public DnsMessageBase HandleQuery(DnsMessageBase message, IPAddress clientAddress, KeyRecordBase.ProtocolType protocol)
+        public DnsMessageBase HandleQuery(DnsMessageBase message, IPAddress clientAddress, ProtocolType protocol)
         {
             var query = message as DnsMessage;
             if (query == null)

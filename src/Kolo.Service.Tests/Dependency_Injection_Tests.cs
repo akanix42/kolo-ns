@@ -1,9 +1,10 @@
 ﻿using System.Linq;
-using System.Web.Http;
+using Kolo.Core.Services;
+using Kolo.Service.Services;
 using Ninject;
 using NUnit.Framework;
 
-namespace Kolo.Web.Tests
+namespace Kolo.Service.Tests
 {
     [TestFixture]
     class Dependency_Injection_Tests
@@ -11,16 +12,15 @@ namespace Kolo.Web.Tests
         [Test]
         public void Ninject_Test()
         {
-            var kernel = NinjectWebCommon.CreateKernel();
+            var kernel = NinjectCommon.CreateKernel();
 
-            var appAssembly = typeof(NinjectWebCommon).Assembly;
+            var appAssembly = typeof(NinjectCommon).Assembly;
 
             var controllerTypes =
                 from type in appAssembly.GetExportedTypes()
-                where typeof(ApiController).IsAssignableFrom(type)
+                where typeof(DnsQueryHandler).IsAssignableFrom(type)
                 where !type.IsAbstract
                 where !type.IsGenericTypeDefinition
-                where type.Name.EndsWith("Controller")
                 select type;
 
             foreach (var controllerType in controllerTypes)
