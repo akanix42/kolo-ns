@@ -9,12 +9,15 @@
 
     var ctor = function () {
         var self = this;
+        var validator;
         this.model = { Name: '', IpV4: '', Id: null, GroupId: null, Type: 'A', };
         //applyValidation();
         this.save = function () {
-            validate();
-            return;
-            dnsEntriesRepository.addDnsEntry(self.model);
+            if (!validator.form()) return;
+
+            if (!self.model.Id)
+                dnsEntriesRepository.addDnsEntry(self.model);
+
         };
 
         this.activate = function (dnsEntryId) {
@@ -22,7 +25,7 @@
                 loadDnsEntry(dnsEntryId);
         }
 
-        this.compositionComplete = function() {
+        this.compositionComplete = function () {
             applyValidation();
         }
 
@@ -33,23 +36,10 @@
         }
 
         function applyValidation() {
-            var name = observable(self.model, 'Name');//.extend({ required: true });
-            $('form[data-validatable]').validate({
-                //onkeyup: true
-            });
+            validator = $('[data-active-view="true"] form[data-validatable="true"]').validate();
         }
-        function validate() {
-            $('form[data-validatable="true"]').validate();
-            //var model = {};
-            //$.each(self.model, function(key, value) {
-            //    model[key] = observable(self.model, key);
-            //});
-            //var validator = ko.validatedObservable(model);
-            //validator.errors.showAllMessages();
-            //console.log('validate');
-            //console.log(validator.isValid());
-        }
+
     }
-    
+
     return ctor;
 });
