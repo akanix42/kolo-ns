@@ -22,7 +22,7 @@ namespace Kolo.Core.Tests.Integration
             IUnitOfWorkProvider unitOfWorkProvider = new NPocoUnitOfWorkProvider();
             using (var uow = unitOfWorkProvider.GetUnitOfWork())
             {
-                IDnsEntriesRepository repository = new DnsEntriesRepository(unitOfWorkProvider);
+                IDnsEntriesRepository repository = new DnsEntriesRepository();
                 repository.DeleteAllEntries(uow);
 
                 var id = repository.AddDnsEntry(uow, dnsEntry);
@@ -47,7 +47,7 @@ namespace Kolo.Core.Tests.Integration
             IUnitOfWorkProvider unitOfWorkProvider = new NPocoUnitOfWorkProvider();
             using (var uow = unitOfWorkProvider.GetUnitOfWork())
             {
-                IDnsEntriesRepository repository = new DnsEntriesRepository(unitOfWorkProvider);
+                IDnsEntriesRepository repository = new DnsEntriesRepository();
                 repository.DeleteAllEntries(uow);
 
                 var id = repository.AddDnsEntry(uow, dnsEntry);
@@ -73,7 +73,7 @@ namespace Kolo.Core.Tests.Integration
             IUnitOfWorkProvider unitOfWorkProvider = new NPocoUnitOfWorkProvider();
             using (var uow = unitOfWorkProvider.GetUnitOfWork())
             {
-                IDnsEntriesRepository repository = new DnsEntriesRepository(unitOfWorkProvider);
+                IDnsEntriesRepository repository = new DnsEntriesRepository();
 
                 repository.DeleteAllEntries(uow);
                 var id = repository.AddDnsEntry(uow, dnsEntry);
