@@ -12,5 +12,6 @@ namespace Kolo.Core.DataAccess.Repositories
         DnsEntry GetDnsEntry(IUnitOfWork uow, int dnsEntryId);
         List<DnsEntry> GetAllDnsEntries(IUnitOfWork uow);
         void DeleteDnsEntry(IUnitOfWork uow, int dnsEntryId);
+        DnsEntry FindDnsEntryWithWildcard(IUnitOfWork uow, DnsRequest dnsRequest);
     }
 }

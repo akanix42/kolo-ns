@@ -19,7 +19,8 @@ namespace Kolo.Core.Services
         {
             var result = new DnsResolutionResult();
             using (var uow = unitOfWorkProvider.GetUnitOfWork())
-                result.DnsEntry = dnsEntriesRepository.FindDnsEntry(uow, dnsRequest);
+                result.DnsEntry = dnsEntriesRepository.FindDnsEntry(uow, dnsRequest)
+                                  ?? dnsEntriesRepository.FindDnsEntryWithWildcard(uow, dnsRequest);
 
             return result;
         }

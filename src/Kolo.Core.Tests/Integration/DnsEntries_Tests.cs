@@ -61,8 +61,9 @@ namespace Kolo.Core.Tests.Integration
         }
 
         [Test]
-        public void Should_Find_DNS_Entry()
+        public void Should_Find_DNS_Entry_Using_Exact_Match()
         {
+            new Core.DataAccess.SQL.ModelMappings().Create();
             var dnsEntry = new DnsEntry()
             {
                 Type = "TXT",
@@ -81,6 +82,31 @@ namespace Kolo.Core.Tests.Integration
                 uow.Commit();
 
                 repository.FindDnsEntry(uow, new DnsRequest() {Name = dnsEntry.Name, Type = dnsEntry.Type}).Id.Should().Be(id);
+            }
+        }
+
+        [Test]
+        public void Should_Find_DNS_Entry_Using_Wildcard()
+        {
+            new Core.DataAccess.SQL.ModelMappings().Create();
+            var dnsEntry = new DnsEntry()
+            {
+                Type = "TXT",
+                Name = "t*st",
+                IpV4 = "192.168.1.1",
+            };
+
+            IUnitOfWorkProvider unitOfWorkProvider = new NPocoUnitOfWorkProvider();
+            using (var uow = unitOfWorkProvider.GetUnitOfWork())
+            {
+                IDnsEntriesRepository repository = new DnsEntriesRepository();
+
+                repository.DeleteAllEntries(uow);
+                var id = repository.AddDnsEntry(uow, dnsEntry);
+
+                uow.Commit();
+
+                repository.FindDnsEntryWithWildcard(uow, new DnsRequest() { Name = "test", Type = dnsEntry.Type }).Id.Should().Be(id);
             }
         }
     }

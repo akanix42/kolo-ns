@@ -29,7 +29,7 @@ namespace Kolo.Core.DataAccess.Repositories
             return Mapper.Map<Core.Models.DnsEntry>(uow.Db.FirstOrDefault<SQL.Models.DnsEntry>(
                 new Sql()
                     .Append("SELECT * FROM dns_entries dnsEntry")
-                    .Append("WHERE dnsEntry.Name LIKE @name", new { name = dnsRequest.Name })
+                    .Append("WHERE @name LIKE dnsEntry.Name", new { name = dnsRequest.Name })
                     .Append("AND dnsEntry.Type = @type", new { type = dnsRequest.Type })
                 ));
         }

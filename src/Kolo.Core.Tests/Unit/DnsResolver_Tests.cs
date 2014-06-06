@@ -23,7 +23,7 @@ namespace Kolo.Core.Tests.Unit
         }
 
         [Test]
-        public void Should_Resolve_Dns_Query_Because_Entry_Matches()
+        public void Should_Resolve_Dns_Query_Because_Entry_Matches_Exactly()
         {
             var dnsEntriesRepository = Mock.Of<IDnsEntriesRepository>(mock => mock.FindDnsEntry(It.IsAny<IUnitOfWork>(), It.IsAny<DnsRequest>()) == new DnsEntry());
             var unitOfWorkProvider = Mock.Of<IUnitOfWorkProvider>();

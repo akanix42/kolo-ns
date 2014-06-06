@@ -15,12 +15,14 @@ namespace Kolo.Service
     {
         public static void Main(string[] args)
         {
+            new Core.DataAccess.SQL.ModelMappings().Create();
+
             var kernel = NinjectCommon.CreateKernel();
             var dnsQueryHandler = kernel.Get<IDnsQueryHandler>();
-            using (DnsServer server = new DnsServer(IPAddress.Any, 10, 10, dnsQueryHandler.HandleQuery ))
+            using (var server = new DnsServer(IPAddress.Any, 10, 10, dnsQueryHandler.HandleQuery ))
             {
                 server.Start();
-                Console.WriteLine("Press any key to stop server");
+                Console.WriteLine("Press enter to stop server");
                 Console.ReadLine();
             }
         }

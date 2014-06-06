@@ -48,7 +48,7 @@ namespace Kolo.Service.Services
                 return;
             }
 
-            message.AnswerRecords.Add(new ARecord(result.DnsEntry.Name, 3600, IPAddress.Parse(result.DnsEntry.IpV4)));
+            message.AnswerRecords.Add(new ARecord(dnsRequest.Name, 3600, IPAddress.Parse(result.DnsEntry.IpV4)));
         }
     }
 }
