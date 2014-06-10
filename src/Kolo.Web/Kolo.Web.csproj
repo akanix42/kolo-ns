@@ -116,13 +116,18 @@
   <ItemGroup>
     <Content Include="app\config.js" />
     <Content Include="app\jquery.validate.shim.js" />
+    <Content Include="app\repositories\forwarding-servers-repository.js" />
     <Content Include="app\repositories\dns-entries-repository.js" />
     <Content Include="app\main.js" />
+    <Content Include="app\viewmodels\forwarding-server.js" />
+    <Content Include="app\viewmodels\forwarding-servers.js" />
     <Content Include="app\viewmodels\dns-entry.js" />
     <Content Include="app\viewmodels\flickr.js" />
     <Content Include="app\viewmodels\shell.js" />
     <Content Include="app\viewmodels\dns-entries.js" />
     <Content Include="app\views\detail.html" />
+    <Content Include="app\views\forwarding-server.html" />
+    <Content Include="app\views\forwarding-servers.html" />
     <Content Include="app\views\dns-entry.html" />
     <Content Include="app\views\flickr.html" />
     <Content Include="app\views\shell.html" />
@@ -192,6 +197,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <None Include="Controllers\DnsGroupsController.cs.o" />
+    <Compile Include="Controllers\ForwardingServersController.cs" />
     <Compile Include="Controllers\DnsEntriesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

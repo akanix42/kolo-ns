@@ -12,8 +12,10 @@
         },
         activate: function () {
             router.map([
-                { route: 'dns-entries/:id', title: 'DNS Entries', moduleId: 'viewmodels/dns-entry', nav: true },
+                { route: 'dns-entries/:id', title: 'DNS Entry', moduleId: 'viewmodels/dns-entry', nav: false },
                 { route: ['', 'dns-entries', 'dns-entries?*'], title: 'DNS Entries', moduleId: 'viewmodels/dns-entries', nav: true },
+                { route: 'forwarding-servers/:id', title: 'Forwarding Server', moduleId: 'viewmodels/forwarding-server', nav: false },
+                { route: [ 'forwarding-servers', 'forwarding-servers?*'], title: 'Forwarding Servers', moduleId: 'viewmodels/forwarding-servers', nav: true },
                 { route: 'flickr', moduleId: 'viewmodels/flickr', nav: true }
             ]).buildNavigationModel();
             

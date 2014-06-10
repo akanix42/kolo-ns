@@ -64,6 +64,7 @@ namespace Kolo.Web
         {
             kernel.Bind<IUnitOfWorkProvider>().To<NPocoUnitOfWorkProvider>();
             kernel.Bind<IDnsEntriesRepository>().To<DnsEntriesRepository>();
+            kernel.Bind<IForwardingServersRepository>().To<ForwardingServersRepository>();
         }        
     }
 }

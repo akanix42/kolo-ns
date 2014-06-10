@@ -39,6 +39,7 @@ namespace Kolo.Service
         {
             kernel.Bind<IUnitOfWorkProvider>().To<NPocoUnitOfWorkProvider>();
             kernel.Bind<IDnsEntriesRepository>().To<DnsEntriesRepository>();
+            kernel.Bind<IForwardingServersRepository>().To<ForwardingServersRepository>();
 
             kernel.Bind<IDnsResolver>().To<DnsResolver>();
             kernel.Bind<IDnsQueryHandler>().To<DnsQueryHandler>();

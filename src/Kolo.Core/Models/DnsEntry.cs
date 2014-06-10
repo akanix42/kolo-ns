@@ -2,8 +2,6 @@
 
 namespace Kolo.Core.Models
 {
-    [TableName("dns_entries")]
-    [PrimaryKey("Id")]
     public class DnsEntry
     {
         public int Id { get; set; }
