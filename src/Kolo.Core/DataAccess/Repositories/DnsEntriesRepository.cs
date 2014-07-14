@@ -10,8 +10,9 @@ namespace Kolo.Core.DataAccess.Repositories
     {
         public int AddDnsEntry(IUnitOfWork uow, DnsEntry dnsEntry)
         {
-            dnsEntry.Name = dnsEntry.Name.Replace('*', '%');
-            return Convert.ToInt32(uow.Db.Insert(dnsEntry));
+            //dnsEntry.Name = dnsEntry.Name.Replace('*', '%');
+            var entry = Mapper.Map<SQL.Models.DnsEntry>(dnsEntry);
+            return Convert.ToInt32(uow.Db.Insert(entry));
         }
 
         public DnsEntry FindDnsEntry(IUnitOfWork uow, DnsRequest dnsRequest)
@@ -42,7 +43,7 @@ namespace Kolo.Core.DataAccess.Repositories
 
         public void UpdateDnsEntry(IUnitOfWork uow, DnsEntry dnsEntry)
         {
-            uow.Db.Update(dnsEntry);
+            uow.Db.Update(Mapper.Map<SQL.Models.DnsEntry>(dnsEntry));
         }
 
         public DnsEntry GetDnsEntry(IUnitOfWork uow, int dnsEntryId)
