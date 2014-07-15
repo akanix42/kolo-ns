@@ -57,8 +57,10 @@ namespace Kolo.Core.Services
             var answer = client.Resolve(dnsRequest.Name, recordType);
             if (answer != null && answer.AnswerRecords.Any())
             {
-                var record = answer.AnswerRecords.First();
-                if (record.RecordType != RecordType.A)
+                var record = answer.AnswerRecords.FirstOrDefault(r=>r.RecordType== recordType);
+                //if (record.RecordType != RecordType.A)
+                //    return null;
+                if (record == null)
                     return null;
 
                 var dnsEntry = new DnsEntry() { Name = record.Name, IpV4 = ((ARecord)record).Address.ToString() };
