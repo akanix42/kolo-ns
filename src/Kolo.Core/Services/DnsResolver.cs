@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using ARSoft.Tools.Net.Dns;
@@ -10,6 +11,8 @@ namespace Kolo.Core.Services
 {
     public class DnsResolver : IDnsResolver
     {
+        static readonly Dictionary<string, DnsEntry> Cache = new Dictionary<string, DnsEntry>();
+
         private readonly IDnsEntriesRepository dnsEntriesRepository;
         private readonly IUnitOfWorkProvider unitOfWorkProvider;
         private readonly IForwardingServersRepository forwardingServersRepository;
@@ -28,10 +31,17 @@ namespace Kolo.Core.Services
             {
                 result.DnsEntry = (dnsEntriesRepository.FindDnsEntry(uow, dnsRequest)
                                    ?? dnsEntriesRepository.FindDnsEntryWithWildcard(uow, dnsRequest))
+                                   ?? CheckCache(dnsRequest)
                                   ?? ForwardRequest(dnsRequest);
             }
 
             return result;
+        }
+
+        private DnsEntry CheckCache(DnsRequest dnsRequest)
+        {
+            DnsEntry dnsEntry;
+            return Cache.TryGetValue(dnsRequest.Name, out dnsEntry) ? dnsEntry : null;
         }
 
         private DnsEntry ForwardRequest(DnsRequest dnsRequest)
@@ -44,7 +54,13 @@ namespace Kolo.Core.Services
                 {
                     var dnsEntry = ForwardRequestToServer(dnsRequest, forwardingServer, recordType);
                     if (dnsEntry != null)
+                    {
+                        if (!Cache.ContainsKey(dnsEntry.Name))
+                            Cache.Add(dnsEntry.Name, dnsEntry);
+                        else
+                            Cache[dnsEntry.Name] = dnsEntry;
                         return dnsEntry;
+                    }
                 }
                 return null;
             }
@@ -57,12 +73,13 @@ namespace Kolo.Core.Services
             var answer = client.Resolve(dnsRequest.Name, recordType);
             if (answer != null && answer.AnswerRecords.Any())
             {
-                var record = answer.AnswerRecords.FirstOrDefault(r=>r.RecordType== recordType);
+                var record = answer.AnswerRecords.FirstOrDefault(r => r.RecordType == recordType);
                 //if (record.RecordType != RecordType.A)
                 //    return null;
                 if (record == null)
                     return null;
-
+                if (record.RecordType != RecordType.A)
+                    return null;
                 var dnsEntry = new DnsEntry() { Name = record.Name, IpV4 = ((ARecord)record).Address.ToString() };
                 return dnsEntry;
             }
